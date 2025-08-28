@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@layer components {
+  .form-input {
+    @apply text-gray-700 p-1 m-2 flex flex-col;
+  }
+  .btn {
+    @apply bg-cyan-500 text-white cursor-pointer shadow-md hover:shadow-none py-1 px-3 font-semibold rounded-full;
+  }
+}
