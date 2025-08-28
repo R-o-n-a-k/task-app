@@ -45,14 +45,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <>
-      <nav className="flex items-center justify-between p-4 shadow px-40">
+      <nav className="bg-cyan-50 flex items-center justify-between p-2 md:p-4 shadow px-5 md:px-40">
         <NavLink to="/">
-          <div className="inline-flex gap-2 font-bold text-xl text-center justify-center">
+          <div className="inline-flex gap-1 md:gap-2 font-bold text-lg md:text-xl text-center justify-center">
             <img className="h-5 w-5 self-center" src="/task.png" alt="" /> Task
             App
           </div>
         </NavLink>
-        <div className="flex gap-6 font-semibold">
+        <div className="flex gap-4 md:gap-6 font-semibold">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -75,7 +75,7 @@ export default function App() {
           </NavLink>
         </div>
       </nav>
-      <div className="max-w-[70%] mx-auto">
+      <div className="max-w-[90%] md:max-w-[70%] mx-auto">
         <Outlet />
       </div>
     </>
