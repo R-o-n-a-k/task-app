@@ -84,11 +84,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                   className="p-4 bg-cyan-50 rounded-md shadow-md"
                 >
                   <Link to={`/home/${task.id}`}>
-                    <h2 className="text-lg font-semibold text-cyan-600 underline underline-offset-2 hover:text-cyan-800 hover:no-underline transition">
+                    <h2 className="text-base md:text-lg font-semibold text-cyan-600 underline underline-offset-2 hover:text-cyan-800 hover:no-underline transition">
                       {task.title}
                     </h2>
                   </Link>
-                  <p className="text-gray-700">{task.description}</p>
+                  <p className="text-sm md:text-base text-gray-700">
+                    {task.description}
+                  </p>
                 </li>
               );
             })}
