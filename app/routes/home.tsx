@@ -2,6 +2,8 @@ import type { Route } from "./+types/home";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../lib/firebase-config";
 import { Link } from "react-router";
+import { useState } from "react";
+import Pagination from "~/components/Pagination";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -26,6 +28,15 @@ export async function loader() {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   const { error, items } = loaderData;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(5);
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+
+  const currentPosts = items?.slice(firstPostIndex, lastPostIndex) || [];
+
   return (
     <div className="">
       {error && (
@@ -51,7 +62,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       ) : (
         <>
           <ul className="space-y-4">
-            {items?.map((item) => {
+            {currentPosts?.map((item) => {
               const task = item as {
                 id: string;
                 title: string;
@@ -93,6 +104,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               </svg>
             </Link>
           </button>
+
+          <Pagination
+            totalPosts={items?.length || 0}
+            postPerPage={postsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
         </>
       )}
     </div>
