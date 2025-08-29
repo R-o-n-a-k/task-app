@@ -49,25 +49,51 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           </Link>
         </div>
       ) : (
-        <ul className="space-y-4">
-          {items?.map((item) => {
-            const task = item as {
-              id: string;
-              title: string;
-              description: string;
-            };
-            return (
-              <li key={item.id} className="p-4 bg-cyan-50 rounded-md shadow-md">
-                <Link to={`/home/${task.id}`}>
-                  <h2 className="text-lg font-semibold text-cyan-600 underline underline-offset-2 hover:text-cyan-800 hover:no-underline transition">
-                    {task.title}
-                  </h2>
-                </Link>
-                <p className="text-gray-700">{task.description}</p>
-              </li>
-            );
-          })}
-        </ul>
+        <>
+          <ul className="space-y-4">
+            {items?.map((item) => {
+              const task = item as {
+                id: string;
+                title: string;
+                description: string;
+              };
+              return (
+                <li
+                  key={item.id}
+                  className="p-4 bg-cyan-50 rounded-md shadow-md"
+                >
+                  <Link to={`/home/${task.id}`}>
+                    <h2 className="text-lg font-semibold text-cyan-600 underline underline-offset-2 hover:text-cyan-800 hover:no-underline transition">
+                      {task.title}
+                    </h2>
+                  </Link>
+                  <p className="text-gray-700">{task.description}</p>
+                </li>
+              );
+            })}
+          </ul>
+          <button className="p-3 fixed rounded-full bottom-10 right-20 bg-cyan-500 text-white cursor-pointer shadow-md hover:shadow-none hover:bg-cyan-600 text-4xl flex items-center justify-center">
+            <Link to="/new" className="">
+              <svg
+                className="w-7 h-7 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 12h14m-7 7V5"
+                />
+              </svg>
+            </Link>
+          </button>
+        </>
       )}
     </div>
   );
