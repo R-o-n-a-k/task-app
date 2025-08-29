@@ -60,7 +60,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
         description: description.toString(),
         updatedAt: new Date(),
       });
-      return { updated: true };
+      // return { updated: true };
+      return redirect("/");
     }
   } catch (error) {
     return { error: "Failed to perform operation" };
@@ -83,11 +84,11 @@ export default function NewItem({
 
       {error && <div className="text-red-500">{error}</div>}
 
-      {actionData?.updated && (
+      {/* {actionData?.updated && (
         <div className="md:w-[48%] mx-auto bg-green-200 px-2 py-1 rounded-md text-green-500 my-2">
           Task updated successfully!
         </div>
-      )}
+      )} */}
 
       <Form method="post" className="md:w-[50%] mx-auto flex flex-col">
         <div className="form-input">
