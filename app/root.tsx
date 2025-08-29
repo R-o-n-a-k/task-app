@@ -45,7 +45,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <>
-      <nav className="bg-cyan-50 flex items-center justify-between p-2 md:p-4 shadow px-5 md:px-40">
+      <nav className="bg-white flex items-center justify-between p-2 md:p-4 shadow px-5 md:px-40">
         <NavLink to="/">
           <div className="inline-flex gap-1 md:gap-2 font-bold text-lg md:text-xl text-center justify-center">
             <img className="h-5 w-5 self-center" src="/task.png" alt="" /> Task
