@@ -20,7 +20,17 @@ export async function loader() {
   try {
     const tasksCollectionRef = collection(db, "tasks");
     const data = await getDocs(tasksCollectionRef);
-    return { items: data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) };
+    const tasks = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+
+    // Sort by createdAt in descending order (latest first)
+    const sortedTasks = tasks.sort((a, b) => {
+      const dateA = (a as any).createdAt?.toDate?.() || new Date(0);
+      const dateB = (b as any).createdAt?.toDate?.() || new Date(0);
+      return dateB.getTime() - dateA.getTime();
+    });
+    return { items: sortedTasks };
+
+    // return { items: data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) };
   } catch (error) {
     return { error: "Failed to Load tasks" };
   }
@@ -74,11 +84,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                   className="p-4 bg-cyan-50 rounded-md shadow-md"
                 >
                   <Link to={`/home/${task.id}`}>
-                    <h2 className="text-lg font-semibold text-cyan-600 underline underline-offset-2 hover:text-cyan-800 hover:no-underline transition">
+                    <h2 className="text-base md:text-lg font-semibold text-cyan-600 underline underline-offset-2 hover:text-cyan-800 hover:no-underline transition">
                       {task.title}
                     </h2>
                   </Link>
-                  <p className="text-gray-700">{task.description}</p>
+                  <p className="text-sm md:text-base text-gray-700">
+                    {task.description}
+                  </p>
                 </li>
               );
             })}
